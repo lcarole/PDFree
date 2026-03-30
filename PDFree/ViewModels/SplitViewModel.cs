@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -13,7 +11,7 @@ namespace PDFree.ViewModels;
 public partial class SplitViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainVm;
-    private readonly IPdfSplitService _splitService = new PdfSplitService();
+    private readonly IPdfSplitService _splitService;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SplitCommand))]
@@ -38,9 +36,10 @@ public partial class SplitViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isSuccess;
 
-    public SplitViewModel(MainWindowViewModel mainVm)
+    public SplitViewModel(MainWindowViewModel mainVm, IPdfSplitService splitService)
     {
         _mainVm = mainVm;
+        _splitService = splitService;
     }
 
     [RelayCommand]

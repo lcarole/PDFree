@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -24,9 +25,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public Lang Lang => Lang.Instance;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IServiceProvider services)
     {
-        _homeViewModel = new HomeViewModel(this);
+        _homeViewModel = new HomeViewModel(this, services);
         _currentView = _homeViewModel;
     }
 

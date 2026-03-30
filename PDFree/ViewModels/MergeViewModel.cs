@@ -1,10 +1,7 @@
-using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,7 +13,7 @@ namespace PDFree.ViewModels;
 public partial class MergeViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainVm;
-    private readonly IPdfMergeService _mergeService = new PdfMergeService();
+    private readonly IPdfMergeService _mergeService;
 
     public ObservableCollection<string> Files { get; } = new();
 
@@ -30,9 +27,10 @@ public partial class MergeViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isSuccess;
 
-    public MergeViewModel(MainWindowViewModel mainVm)
+    public MergeViewModel(MainWindowViewModel mainVm, IPdfMergeService mergeService)
     {
         _mainVm = mainVm;
+        _mergeService = mergeService;
         Files.CollectionChanged += (_, _) => MergeCommand.NotifyCanExecuteChanged();
     }
 

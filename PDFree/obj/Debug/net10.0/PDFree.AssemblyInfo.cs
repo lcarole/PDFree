@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PDFree")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a9ce10f92c25166d5a66579eeed3749b0609d4c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PDFree")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PDFree")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

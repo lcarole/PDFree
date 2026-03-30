@@ -1,6 +1,8 @@
+using System;
 using System.Collections.ObjectModel;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PDFree.Models;
 using PDFree.Services;
 
@@ -9,14 +11,16 @@ namespace PDFree.ViewModels;
 public partial class HomeViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainVm;
+    private readonly IServiceProvider _services;
 
     public ObservableCollection<ToolItem> Tools { get; } = new();
 
     public Lang Lang => Lang.Instance;
 
-    public HomeViewModel(MainWindowViewModel mainVm)
+    public HomeViewModel(MainWindowViewModel mainVm, IServiceProvider services)
     {
         _mainVm = mainVm;
+        _services = services;
         RefreshTools();
     }
 
@@ -47,9 +51,9 @@ public partial class HomeViewModel : ViewModelBase
     {
         ViewModelBase vm = toolId switch
         {
-            "merge" => new MergeViewModel(_mainVm),
-            "split" => new SplitViewModel(_mainVm),
-            "compress" => new CompressViewModel(_mainVm),
+            "merge" => _services.GetRequiredService<MergeViewModel>(),
+            "split" => _services.GetRequiredService<SplitViewModel>(),
+            "compress" => _services.GetRequiredService<CompressViewModel>(),
             _ => this
         };
         _mainVm.NavigateTo(vm);

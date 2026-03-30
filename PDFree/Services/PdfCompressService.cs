@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using iText.Kernel.Pdf;
 using PDFree.Models;
 

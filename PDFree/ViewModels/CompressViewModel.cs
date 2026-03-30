@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia;
@@ -13,7 +12,7 @@ namespace PDFree.ViewModels;
 public partial class CompressViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainVm;
-    private readonly IPdfCompressService _compressService = new PdfCompressService();
+    private readonly IPdfCompressService _compressService;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(CompressCommand))]
@@ -38,9 +37,10 @@ public partial class CompressViewModel : ViewModelBase
     [ObservableProperty]
     private long _compressedSize;
 
-    public CompressViewModel(MainWindowViewModel mainVm)
+    public CompressViewModel(MainWindowViewModel mainVm, IPdfCompressService compressService)
     {
         _mainVm = mainVm;
+        _compressService = compressService;
     }
 
     [RelayCommand]
