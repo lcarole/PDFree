@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PDFree.ViewModels"
+             xmlns:models="using:PDFree.Models"
+             xmlns:services="using:PDFree.Services"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="650"
+             x:Class="PDFree.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="32" Margin="40,32">
+            <!-- Header -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding [AppTitle], Source={x:Static services:Lang.Instance}}"
+                           FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding [AppSubtitle], Source={x:Static services:Lang.Instance}}"
+                           FontSize="16" Opacity="0.7" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Tool cards grid -->
+            <ItemsControl ItemsSource="{Binding Tools}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:ToolItem">
+                        <Button Command="{Binding $parent[ItemsControl].((vm:HomeViewModel)DataContext).OpenToolCommand}"
+                                CommandParameter="{Binding Id}"
+                                Margin="10" Padding="0" CornerRadius="12"
+                                Background="Transparent"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch">
+                            <Border CornerRadius="12" Padding="24" Width="220" Height="200"
+                                    Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                                    BorderThickness="1">
+                                <StackPanel Spacing="12" VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <Border Width="56" Height="56" CornerRadius="28"
+                                            HorizontalAlignment="Center">
+                                        <PathIcon Data="{Binding Icon}" Width="28" Height="28"
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Description}" FontSize="13"
+                                               Opacity="0.6" TextWrapping="Wrap" TextAlignment="Center"
+                                               MaxWidth="180"/>
+                                </StackPanel>
+                            </Border>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

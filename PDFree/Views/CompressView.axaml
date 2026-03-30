@@ -1,0 +1,92 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PDFree.ViewModels"
+             xmlns:services="using:PDFree.Services"
+             xmlns:conv="using:PDFree.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="650"
+             x:Class="PDFree.Views.CompressView"
+             x:DataType="vm:CompressViewModel">
+
+    <UserControl.Resources>
+        <conv:FileSizeConverter x:Key="FileSizeConverter"/>
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="20" Margin="40,24" MaxWidth="700" HorizontalAlignment="Center">
+            <!-- Title -->
+            <TextBlock Text="{Binding [CompressTitle], Source={x:Static services:Lang.Instance}}" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="{Binding [CompressSubtitle], Source={x:Static services:Lang.Instance}}" Opacity="0.6"/>
+
+            <!-- File selection -->
+            <Button Command="{Binding SelectFileCommand}" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" Padding="16,12" CornerRadius="8"
+                    Classes="accent">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <PathIcon Data="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"
+                              Width="18" Height="18"/>
+                    <TextBlock Text="{Binding [CompressSelectFile], Source={x:Static services:Lang.Instance}}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Selected file + size info -->
+            <Border CornerRadius="6" Padding="16,10"
+                    Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                    IsVisible="{Binding SelectedFile, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding SelectedFile}" TextTrimming="CharacterEllipsis" Opacity="0.8"/>
+                    <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
+                        <TextBlock Text="{Binding [CompressOriginalSize], Source={x:Static services:Lang.Instance}}"/>
+                        <TextBlock Text="{Binding OriginalSize, Converter={StaticResource FileSizeConverter}}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Compression level -->
+            <TextBlock Text="{Binding [CompressLevelLabel], Source={x:Static services:Lang.Instance}}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+
+            <StackPanel Spacing="10">
+                <RadioButton GroupName="Level"
+                             Content="{Binding [CompressLevelLow], Source={x:Static services:Lang.Instance}}"
+                             IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static services:CompressionLevel.Low}}"/>
+                <RadioButton GroupName="Level"
+                             Content="{Binding [CompressLevelMedium], Source={x:Static services:Lang.Instance}}"
+                             IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static services:CompressionLevel.Medium}}"/>
+                <RadioButton GroupName="Level"
+                             Content="{Binding [CompressLevelHigh], Source={x:Static services:Lang.Instance}}"
+                             IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static services:CompressionLevel.High}}"/>
+            </StackPanel>
+
+            <!-- Compress button -->
+            <Button Command="{Binding CompressCommand}" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" Padding="16,14" CornerRadius="8"
+                    FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0">
+                <TextBlock Text="{Binding [CompressButton], Source={x:Static services:Lang.Instance}}"/>
+            </Button>
+
+            <!-- Progress -->
+            <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" Margin="0,4"/>
+
+            <!-- Result -->
+            <Border CornerRadius="6" Padding="16,10"
+                    Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                    IsVisible="{Binding StatusMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding StatusMessage}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal" Spacing="16"
+                                IsVisible="{Binding IsSuccess}">
+                        <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
+                            <TextBlock Text="{Binding [CompressBefore], Source={x:Static services:Lang.Instance}}"/>
+                            <TextBlock Text="{Binding OriginalSize, Converter={StaticResource FileSizeConverter}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
+                            <TextBlock Text="{Binding [CompressAfter], Source={x:Static services:Lang.Instance}}"/>
+                            <TextBlock Text="{Binding CompressedSize, Converter={StaticResource FileSizeConverter}}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

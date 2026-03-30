@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PDFree.ViewModels"
+        xmlns:services="using:PDFree.Services"
+        xmlns:conv="using:PDFree.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="650"
+        x:Class="PDFree.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PDFree"
+        MinWidth="700"
+        MinHeight="500">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <!-- Top bar -->
+        <Border DockPanel.Dock="Top" Padding="16,8"
+                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}">
+            <DockPanel>
+                <!-- Left: Back button -->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Spacing="12"
+                            IsVisible="{Binding CanGoBack}">
+                    <Button Command="{Binding GoHomeCommand}" Classes="accent"
+                            Padding="10,6" CornerRadius="6">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <PathIcon Data="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                                      Width="16" Height="16"/>
+                            <TextBlock Text="{Binding [Home], Source={x:Static services:Lang.Instance}}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Right: Theme + Language -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8"
+                            VerticalAlignment="Center">
+                    <!-- Language toggle -->
+                    <Button Command="{Binding ToggleLanguageCommand}"
+                            Padding="8,5" CornerRadius="6" Background="Transparent"
+                            ToolTip.Tip="{Binding [Language], Source={x:Static services:Lang.Instance}}">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <PathIcon Data="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+                                      Width="16" Height="16"/>
+                            <TextBlock Text="{Binding IsFrench, StringFormat={}{0}}"
+                                       VerticalAlignment="Center" FontSize="12" FontWeight="SemiBold">
+                                <TextBlock.Text>
+                                    <Binding Path="IsFrench">
+                                        <Binding.Converter>
+                                            <conv:BoolToStringConverter TrueValue="FR" FalseValue="EN"/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Theme selector -->
+                    <ComboBox SelectedIndex="{Binding ThemeIndex}"
+                              Padding="8,4" CornerRadius="6" MinWidth="100">
+                        <ComboBoxItem Content="{Binding [ThemeSystem], Source={x:Static services:Lang.Instance}}"/>
+                        <ComboBoxItem Content="{Binding [ThemeLight], Source={x:Static services:Lang.Instance}}"/>
+                        <ComboBoxItem Content="{Binding [ThemeDark], Source={x:Static services:Lang.Instance}}"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Center spacer -->
+                <Panel/>
+            </DockPanel>
+        </Border>
+
+        <!-- Main content area driven by CurrentView -->
+        <ContentControl Content="{Binding CurrentView}" Margin="0"/>
+    </DockPanel>
+
+</Window>

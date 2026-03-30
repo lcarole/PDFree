@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- App -->
+  <data name="AppTitle" xml:space="preserve"><value>PDFree</value></data>
+  <data name="AppSubtitle" xml:space="preserve"><value>All the PDF tools you need, free and offline.</value></data>
+  <data name="Home" xml:space="preserve"><value>Home</value></data>
+
+  <!-- Theme -->
+  <data name="ThemeSystem" xml:space="preserve"><value>System</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Light</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Dark</value></data>
+
+  <!-- Tools -->
+  <data name="ToolMergeTitle" xml:space="preserve"><value>Merge</value></data>
+  <data name="ToolMergeDesc" xml:space="preserve"><value>Combine multiple PDFs into a single file.</value></data>
+  <data name="ToolSplitTitle" xml:space="preserve"><value>Split</value></data>
+  <data name="ToolSplitDesc" xml:space="preserve"><value>Separate a PDF into multiple files.</value></data>
+  <data name="ToolCompressTitle" xml:space="preserve"><value>Compress</value></data>
+  <data name="ToolCompressDesc" xml:space="preserve"><value>Reduce the size of a PDF file.</value></data>
+
+  <!-- Merge View -->
+  <data name="MergeTitle" xml:space="preserve"><value>Merge PDFs</value></data>
+  <data name="MergeSubtitle" xml:space="preserve"><value>Combine multiple PDF files into a single document.</value></data>
+  <data name="MergeAddFiles" xml:space="preserve"><value>Add PDF files</value></data>
+  <data name="MergeEmptyState" xml:space="preserve"><value>No files added. Click the button above to add PDFs.</value></data>
+  <data name="MergeButton" xml:space="preserve"><value>Merge</value></data>
+  <data name="MergeDialogTitle" xml:space="preserve"><value>Select PDF files</value></data>
+  <data name="MergeSaveTitle" xml:space="preserve"><value>Save merged PDF</value></data>
+  <data name="MergeSuggestedName" xml:space="preserve"><value>merged.pdf</value></data>
+  <data name="MergeSuccess" xml:space="preserve"><value>Merge successful! ({0} files)</value></data>
+  <data name="MergeMinFiles" xml:space="preserve"><value>At least 2 PDF files are required for merging.</value></data>
+  <data name="MergeError" xml:space="preserve"><value>Error during merge: {0}</value></data>
+  <data name="MoveUp" xml:space="preserve"><value>Move up</value></data>
+  <data name="MoveDown" xml:space="preserve"><value>Move down</value></data>
+  <data name="Remove" xml:space="preserve"><value>Remove</value></data>
+
+  <!-- Split View -->
+  <data name="SplitTitle" xml:space="preserve"><value>Split a PDF</value></data>
+  <data name="SplitSubtitle" xml:space="preserve"><value>Separate a PDF file into multiple documents.</value></data>
+  <data name="SplitSelectFile" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="SplitModeLabel" xml:space="preserve"><value>Split mode</value></data>
+  <data name="SplitModeEachPage" xml:space="preserve"><value>Each page separately</value></data>
+  <data name="SplitModeEveryN" xml:space="preserve"><value>Every N pages</value></data>
+  <data name="SplitModePageRange" xml:space="preserve"><value>Page range (e.g. 1-3, 5, 8-10)</value></data>
+  <data name="SplitButton" xml:space="preserve"><value>Split</value></data>
+  <data name="SplitDialogTitle" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="SplitOutputFolder" xml:space="preserve"><value>Output folder</value></data>
+  <data name="SplitSuccess" xml:space="preserve"><value>Split successful! Files in: {0}</value></data>
+  <data name="SplitError" xml:space="preserve"><value>Error during split: {0}</value></data>
+  <data name="SplitPageRangeRequired" xml:space="preserve"><value>Page range is required for PageRange mode.</value></data>
+
+  <!-- Compress View -->
+  <data name="CompressTitle" xml:space="preserve"><value>Compress a PDF</value></data>
+  <data name="CompressSubtitle" xml:space="preserve"><value>Reduce the size of a PDF file.</value></data>
+  <data name="CompressSelectFile" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="CompressLevelLabel" xml:space="preserve"><value>Compression level</value></data>
+  <data name="CompressLevelLow" xml:space="preserve"><value>Low — Maximum quality, small reduction</value></data>
+  <data name="CompressLevelMedium" xml:space="preserve"><value>Medium — Good quality/size balance</value></data>
+  <data name="CompressLevelHigh" xml:space="preserve"><value>High — Maximum reduction</value></data>
+  <data name="CompressButton" xml:space="preserve"><value>Compress</value></data>
+  <data name="CompressDialogTitle" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="CompressSaveTitle" xml:space="preserve"><value>Save compressed PDF</value></data>
+  <data name="CompressSuggestedSuffix" xml:space="preserve"><value>_compressed</value></data>
+  <data name="CompressSuccess" xml:space="preserve"><value>Compression successful! Reduced by {0:F1}%</value></data>
+  <data name="CompressError" xml:space="preserve"><value>Error during compression: {0}</value></data>
+  <data name="CompressOriginalSize" xml:space="preserve"><value>Original size:</value></data>
+  <data name="CompressBefore" xml:space="preserve"><value>Before:</value></data>
+  <data name="CompressAfter" xml:space="preserve"><value>After:</value></data>
+
+  <!-- Language -->
+  <data name="Language" xml:space="preserve"><value>Language</value></data>
+</root>
