@@ -13,9 +13,9 @@
         <StackPanel Spacing="32" Margin="40,32">
             <!-- Header -->
             <StackPanel Spacing="8" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding [AppTitle], Source={x:Static services:Lang.Instance}}"
+                <TextBlock Text="{Binding AppTitle}"
                            FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding [AppSubtitle], Source={x:Static services:Lang.Instance}}"
+                <TextBlock Text="{Binding AppSubtitle}"
                            FontSize="16" Opacity="0.7" HorizontalAlignment="Center"/>
             </StackPanel>
 

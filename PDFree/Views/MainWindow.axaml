@@ -36,28 +36,19 @@
                     </Button>
                 </StackPanel>
 
-                <!-- Right: Theme + Language -->
+                <!-- Right: Language + Theme -->
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8"
                             VerticalAlignment="Center">
-                    <!-- Language toggle -->
-                    <Button Command="{Binding ToggleLanguageCommand}"
-                            Padding="8,5" CornerRadius="6" Background="Transparent"
-                            ToolTip.Tip="{Binding [Language], Source={x:Static services:Lang.Instance}}">
-                        <StackPanel Orientation="Horizontal" Spacing="4">
-                            <PathIcon Data="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
-                                      Width="16" Height="16"/>
-                            <TextBlock Text="{Binding IsFrench, StringFormat={}{0}}"
-                                       VerticalAlignment="Center" FontSize="12" FontWeight="SemiBold">
-                                <TextBlock.Text>
-                                    <Binding Path="IsFrench">
-                                        <Binding.Converter>
-                                            <conv:BoolToStringConverter TrueValue="FR" FalseValue="EN"/>
-                                        </Binding.Converter>
-                                    </Binding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <!-- Language selector -->
+                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                        <PathIcon Data="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+                                  Width="16" Height="16" Opacity="0.7"/>
+                        <ComboBox SelectedIndex="{Binding LanguageIndex}"
+                                  Padding="8,4" CornerRadius="6" MinWidth="80">
+                            <ComboBoxItem Content="Français"/>
+                            <ComboBoxItem Content="English"/>
+                        </ComboBox>
+                    </StackPanel>
 
                     <!-- Theme selector -->
                     <ComboBox SelectedIndex="{Binding ThemeIndex}"

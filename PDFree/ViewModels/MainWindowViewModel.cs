@@ -16,7 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private bool _canGoBack;
 
     [ObservableProperty]
-    private bool _isFrench = true;
+    private int _languageIndex; // 0=FR, 1=EN
 
     [ObservableProperty]
     private int _themeIndex; // 0=System, 1=Light, 2=Dark
@@ -43,12 +43,10 @@ public partial class MainWindowViewModel : ViewModelBase
         NavigateTo(_homeViewModel);
     }
 
-    [RelayCommand]
-    private void ToggleLanguage()
+    partial void OnLanguageIndexChanged(int value)
     {
-        IsFrench = !IsFrench;
-        Lang.Instance.SwitchLanguage(IsFrench ? "fr" : "en");
-        // Rebuild the home tools so their titles/descriptions update
+        var code = value switch { 1 => "en", _ => "fr" };
+        Lang.Instance.SwitchLanguage(code);
         _homeViewModel.RefreshTools();
     }
 

@@ -15,6 +15,12 @@ public partial class HomeViewModel : ViewModelBase
 
     public ObservableCollection<ToolItem> Tools { get; } = new();
 
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _appTitle = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _appSubtitle = string.Empty;
+
     public Lang Lang => Lang.Instance;
 
     public HomeViewModel(MainWindowViewModel mainVm, IServiceProvider services)
@@ -26,6 +32,9 @@ public partial class HomeViewModel : ViewModelBase
 
     public void RefreshTools()
     {
+        AppTitle = Lang["AppTitle"];
+        AppSubtitle = Lang["AppSubtitle"];
+
         Tools.Clear();
         Tools.Add(new("merge",
             Lang["ToolMergeTitle"],
