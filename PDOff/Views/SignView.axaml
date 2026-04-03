@@ -1,0 +1,144 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PDOff.ViewModels"
+             xmlns:controls="using:PDOff.Controls"
+             xmlns:converters="using:PDOff.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="900"
+             x:Class="PDOff.Views.SignView"
+             x:DataType="vm:SignViewModel">
+
+    <UserControl.Resources>
+        <converters:EnumToBoolConverter x:Key="EnumToBool"/>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="UserControl.dragging">
+            <Setter Property="Opacity" Value="0.7"/>
+        </Style>
+        <Style Selector="UserControl.dragging Button.drop-zone">
+            <Setter Property="BorderBrush" Value="#4CAF50"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="20" Margin="40,24" MaxWidth="700" HorizontalAlignment="Center">
+
+            <TextBlock Text="{Binding Lang[SignTitle]}" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Lang[SignSubtitle]}" Opacity="0.6"/>
+
+            <!-- PDF file selection -->
+            <Button Command="{Binding SelectFileCommand}" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" Padding="16,12" CornerRadius="8"
+                    Classes="accent drop-zone" DragDrop.AllowDrop="True">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <PathIcon Data="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"
+                              Width="18" Height="18"/>
+                    <TextBlock Text="{Binding Lang[SignSelectFile]}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Border CornerRadius="6" Padding="12,8"
+                    Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                    IsVisible="{Binding SelectedFile, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <TextBlock Text="{Binding SelectedFile}" TextTrimming="CharacterEllipsis" Opacity="0.8"/>
+            </Border>
+
+            <!-- Signature pad -->
+            <TextBlock Text="{Binding Lang[SignDrawLabel]}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            <TextBlock Text="{Binding Lang[SignDrawHint]}" Opacity="0.5" FontSize="12"/>
+
+            <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                    BorderThickness="1" CornerRadius="8" ClipToBounds="True">
+                <controls:SignaturePadControl x:Name="SignaturePad" Height="160"/>
+            </Border>
+
+            <Button Command="{Binding ClearSignatureCommand}" HorizontalAlignment="Left"
+                    Padding="12,6" CornerRadius="6">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <PathIcon Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                              Width="14" Height="14"/>
+                    <TextBlock Text="{Binding Lang[SignClearButton]}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Placement section -->
+            <TextBlock Text="{Binding Lang[SignPlacementLabel]}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            <TextBlock Text="{Binding Lang[SignPlacementHint]}" Opacity="0.5" FontSize="12"/>
+
+            <!-- Interactive placement control -->
+            <Border CornerRadius="8" ClipToBounds="True" Height="380"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <controls:SignaturePlacementControl
+                        PageBitmap="{Binding PageBitmap}"
+                        SignatureBitmap="{Binding SignatureBitmap}"
+                        NormalizedRect="{Binding NormalizedSignatureRect, Mode=TwoWay}"/>
+
+                    <!-- No preview placeholder -->
+                    <TextBlock Text="{Binding Lang[SignNoPreview]}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Opacity="0.5" FontSize="14"
+                               IsVisible="{Binding PageBitmap, Converter={x:Static ObjectConverters.IsNull}}"/>
+
+                    <!-- Loading indicator -->
+                    <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsLoadingPreview}"
+                                 VerticalAlignment="Bottom" Height="3"/>
+                </Grid>
+            </Border>
+
+            <!-- Page target -->
+            <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="{Binding Lang[SignPageLabel]}" FontSize="12" Opacity="0.6"/>
+                    <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,4,0,0">
+                        <RadioButton GroupName="SignPage"
+                                     Content="{Binding Lang[SignPageLast]}"
+                                     Command="{Binding SetPageTargetCommand}" CommandParameter="LastPage"
+                                     IsChecked="{Binding PageTarget, Converter={StaticResource EnumToBool}, ConverterParameter=LastPage, Mode=OneWay}"/>
+                        <RadioButton GroupName="SignPage"
+                                     Content="{Binding Lang[SignPageFirst]}"
+                                     Command="{Binding SetPageTargetCommand}" CommandParameter="FirstPage"
+                                     IsChecked="{Binding PageTarget, Converter={StaticResource EnumToBool}, ConverterParameter=FirstPage, Mode=OneWay}"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <RadioButton GroupName="SignPage"
+                                         Content="{Binding Lang[SignPageCustom]}"
+                                         Command="{Binding SetPageTargetCommand}" CommandParameter="SpecificPage"
+                                         IsChecked="{Binding PageTarget, Converter={StaticResource EnumToBool}, ConverterParameter=SpecificPage, Mode=OneWay}"/>
+                            <NumericUpDown Value="{Binding CustomPageNumber}"
+                                           Minimum="1" Maximum="9999" Increment="1"
+                                           Width="90" FormatString="0"
+                                           IsVisible="{Binding PageTarget, Converter={StaticResource EnumToBool}, ConverterParameter=SpecificPage, Mode=OneWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Sign button -->
+            <Button Command="{Binding SignCommand}" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" Padding="16,14" CornerRadius="8"
+                    FontSize="16" FontWeight="SemiBold">
+                <TextBlock Text="{Binding Lang[SignButton]}"/>
+            </Button>
+
+            <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" Margin="0,4"/>
+
+            <Border CornerRadius="6" Padding="12,8"
+                    IsVisible="{Binding StatusMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <Panel>
+                    <TextBlock Text="{Binding StatusMessage}" TextWrapping="Wrap"
+                               FontWeight="SemiBold" Foreground="#4CAF50"
+                               IsVisible="{Binding IsSuccess}"/>
+                    <TextBlock Text="{Binding StatusMessage}" TextWrapping="Wrap"
+                               FontWeight="SemiBold" Foreground="#D32F2F"
+                               IsVisible="{Binding !IsSuccess}"/>
+                </Panel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

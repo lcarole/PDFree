@@ -16,6 +16,7 @@ public class ViewLocator : IDataTemplate
         [typeof(SplitViewModel)] = () => new Views.SplitView(),
         [typeof(CompressViewModel)] = () => new CompressView(),
         [typeof(RotateViewModel)] = () => new RotateView(),
+        [typeof(SignViewModel)] = () => new SignView(),
     };
 
     public Control? Build(object? param)

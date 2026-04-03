@@ -1,7 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:PDOff.ViewModels"
-             xmlns:services="using:PDOff.Services"
              xmlns:models="using:PDOff.Models"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,8 +21,8 @@
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="20" Margin="40,24" MaxWidth="700" HorizontalAlignment="Center">
             <!-- Title -->
-            <TextBlock Text="{Binding [SplitTitle], Source={x:Static services:Lang.Instance}}" FontSize="28" FontWeight="Bold"/>
-            <TextBlock Text="{Binding [SplitSubtitle], Source={x:Static services:Lang.Instance}}" Opacity="0.6"/>
+            <TextBlock Text="{Binding Lang[SplitTitle]}" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Lang[SplitSubtitle]}" Opacity="0.6"/>
 
             <!-- File selection -->
             <Button Command="{Binding SelectFileCommand}" HorizontalAlignment="Stretch"
@@ -32,7 +31,7 @@
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <PathIcon Data="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"
                               Width="18" Height="18"/>
-                    <TextBlock Text="{Binding [SplitSelectFile], Source={x:Static services:Lang.Instance}}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Lang[SplitSelectFile]}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
@@ -44,16 +43,16 @@
             </Border>
 
             <!-- Split mode -->
-            <TextBlock Text="{Binding [SplitModeLabel], Source={x:Static services:Lang.Instance}}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            <TextBlock Text="{Binding Lang[SplitModeLabel]}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
 
             <StackPanel Spacing="10">
                 <RadioButton GroupName="SplitMode"
-                             Content="{Binding [SplitModeEachPage], Source={x:Static services:Lang.Instance}}"
+                             Content="{Binding Lang[SplitModeEachPage]}"
                              IsChecked="{Binding SplitMode, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:SplitMode.EachPage}}"/>
 
                 <StackPanel Spacing="6">
                     <RadioButton GroupName="SplitMode"
-                                 Content="{Binding [SplitModeEveryN], Source={x:Static services:Lang.Instance}}"
+                                 Content="{Binding Lang[SplitModeEveryN]}"
                                  IsChecked="{Binding SplitMode, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:SplitMode.EveryNPages}}"/>
                     <NumericUpDown Value="{Binding EveryNPages}" Minimum="1" Maximum="100"
                                    Margin="28,0,0,0" Width="150" HorizontalAlignment="Left"
@@ -62,7 +61,7 @@
 
                 <StackPanel Spacing="6">
                     <RadioButton GroupName="SplitMode"
-                                 Content="{Binding [SplitModePageRange], Source={x:Static services:Lang.Instance}}"
+                                 Content="{Binding Lang[SplitModePageRange]}"
                                  IsChecked="{Binding SplitMode, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:SplitMode.PageRange}}"/>
                     <TextBox Text="{Binding PageRange}" Watermark="1-3, 5, 8-10"
                              Margin="28,0,0,0" Width="250" HorizontalAlignment="Left"
@@ -74,7 +73,7 @@
             <Button Command="{Binding SplitCommand}" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" Padding="16,14" CornerRadius="8"
                     FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0">
-                <TextBlock Text="{Binding [SplitButton], Source={x:Static services:Lang.Instance}}"/>
+                <TextBlock Text="{Binding Lang[SplitButton]}"/>
             </Button>
 
             <!-- Progress -->

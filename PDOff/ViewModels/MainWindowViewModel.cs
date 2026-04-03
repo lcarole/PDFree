@@ -23,8 +23,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private readonly HomeViewModel _homeViewModel;
 
-    public Lang Lang => Lang.Instance;
-
     public MainWindowViewModel(IServiceProvider services)
     {
         _homeViewModel = new HomeViewModel(this, services);

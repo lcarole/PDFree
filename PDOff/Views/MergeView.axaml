@@ -1,7 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:PDOff.ViewModels"
-             xmlns:services="using:PDOff.Services"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="650"
@@ -21,8 +20,8 @@
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="20" Margin="40,24" MaxWidth="700" HorizontalAlignment="Center">
             <!-- Title -->
-            <TextBlock Text="{Binding [MergeTitle], Source={x:Static services:Lang.Instance}}" FontSize="28" FontWeight="Bold"/>
-            <TextBlock Text="{Binding [MergeSubtitle], Source={x:Static services:Lang.Instance}}" Opacity="0.6"/>
+            <TextBlock Text="{Binding Lang[MergeTitle]}" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Lang[MergeSubtitle]}" Opacity="0.6"/>
 
             <!-- Add files -->
             <Button Command="{Binding AddFilesCommand}" HorizontalAlignment="Stretch"
@@ -30,7 +29,7 @@
                     Classes="accent">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <PathIcon Data="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" Width="18" Height="18"/>
-                    <TextBlock Text="{Binding [MergeAddFiles], Source={x:Static services:Lang.Instance}}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Lang[MergeAddFiles]}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
@@ -50,21 +49,21 @@
                                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="4">
                                     <Button Command="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).MoveUpCommand}"
                                             CommandParameter="{Binding}"
-                                            ToolTip.Tip="{Binding [MoveUp], Source={x:Static services:Lang.Instance}}"
+                                            ToolTip.Tip="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).Lang[MoveUp]}"
                                             Padding="6,4" Background="Transparent">
                                         <PathIcon Data="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
                                                   Width="14" Height="14"/>
                                     </Button>
                                     <Button Command="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).MoveDownCommand}"
                                             CommandParameter="{Binding}"
-                                            ToolTip.Tip="{Binding [MoveDown], Source={x:Static services:Lang.Instance}}"
+                                            ToolTip.Tip="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).Lang[MoveDown]}"
                                             Padding="6,4" Background="Transparent">
                                         <PathIcon Data="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"
                                                   Width="14" Height="14"/>
                                     </Button>
                                     <Button Command="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).RemoveFileCommand}"
                                             CommandParameter="{Binding}"
-                                            ToolTip.Tip="{Binding [Remove], Source={x:Static services:Lang.Instance}}"
+                                            ToolTip.Tip="{Binding $parent[ListBox].((vm:MergeViewModel)DataContext).Lang[Remove]}"
                                             Padding="6,4" Background="Transparent" Foreground="Red">
                                         <PathIcon Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                                                   Width="14" Height="14"/>
@@ -85,7 +84,7 @@
                     BorderThickness="1" IsVisible="{Binding !Files.Count}"
                     DragDrop.AllowDrop="True"
                     Classes="drop-zone">
-                <TextBlock Text="{Binding [MergeEmptyState], Source={x:Static services:Lang.Instance}}"
+                <TextBlock Text="{Binding Lang[MergeEmptyState]}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            Opacity="0.5" TextWrapping="Wrap" TextAlignment="Center"/>
             </Border>
@@ -94,7 +93,7 @@
             <Button Command="{Binding MergeCommand}" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" Padding="16,14" CornerRadius="8"
                     FontSize="16" FontWeight="SemiBold">
-                <TextBlock Text="{Binding [MergeButton], Source={x:Static services:Lang.Instance}}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Lang[MergeButton]}" VerticalAlignment="Center"/>
             </Button>
 
             <!-- Progress -->

@@ -1,7 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:PDOff.ViewModels"
-             xmlns:services="using:PDOff.Services"
              xmlns:models="using:PDOff.Models"
              xmlns:conv="using:PDOff.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,8 +26,8 @@
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="20" Margin="40,24" MaxWidth="700" HorizontalAlignment="Center">
             <!-- Title -->
-            <TextBlock Text="{Binding [CompressTitle], Source={x:Static services:Lang.Instance}}" FontSize="28" FontWeight="Bold"/>
-            <TextBlock Text="{Binding [CompressSubtitle], Source={x:Static services:Lang.Instance}}" Opacity="0.6"/>
+            <TextBlock Text="{Binding Lang[CompressTitle]}" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Lang[CompressSubtitle]}" Opacity="0.6"/>
 
             <!-- File selection -->
             <Button Command="{Binding SelectFileCommand}" HorizontalAlignment="Stretch"
@@ -37,7 +36,7 @@
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <PathIcon Data="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"
                               Width="18" Height="18"/>
-                    <TextBlock Text="{Binding [CompressSelectFile], Source={x:Static services:Lang.Instance}}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Lang[CompressSelectFile]}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
@@ -48,24 +47,24 @@
                 <StackPanel Spacing="4">
                     <TextBlock Text="{Binding SelectedFile}" TextTrimming="CharacterEllipsis" Opacity="0.8"/>
                     <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
-                        <TextBlock Text="{Binding [CompressOriginalSize], Source={x:Static services:Lang.Instance}}"/>
+                        <TextBlock Text="{Binding Lang[CompressOriginalSize]}"/>
                         <TextBlock Text="{Binding OriginalSize, Converter={StaticResource FileSizeConverter}}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
             <!-- Compression level -->
-            <TextBlock Text="{Binding [CompressLevelLabel], Source={x:Static services:Lang.Instance}}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            <TextBlock Text="{Binding Lang[CompressLevelLabel]}" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
 
             <StackPanel Spacing="10">
                 <RadioButton GroupName="Level"
-                             Content="{Binding [CompressLevelLow], Source={x:Static services:Lang.Instance}}"
+                             Content="{Binding Lang[CompressLevelLow]}"
                              IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:CompressionLevel.Low}}"/>
                 <RadioButton GroupName="Level"
-                             Content="{Binding [CompressLevelMedium], Source={x:Static services:Lang.Instance}}"
+                             Content="{Binding Lang[CompressLevelMedium]}"
                              IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:CompressionLevel.Medium}}"/>
                 <RadioButton GroupName="Level"
-                             Content="{Binding [CompressLevelHigh], Source={x:Static services:Lang.Instance}}"
+                             Content="{Binding Lang[CompressLevelHigh]}"
                              IsChecked="{Binding CompressionLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static models:CompressionLevel.High}}"/>
             </StackPanel>
 
@@ -73,7 +72,7 @@
             <Button Command="{Binding CompressCommand}" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" Padding="16,14" CornerRadius="8"
                     FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0">
-                <TextBlock Text="{Binding [CompressButton], Source={x:Static services:Lang.Instance}}"/>
+                <TextBlock Text="{Binding Lang[CompressButton]}"/>
             </Button>
 
             <!-- Progress -->
@@ -88,11 +87,11 @@
                     <StackPanel Orientation="Horizontal" Spacing="16"
                                 IsVisible="{Binding IsSuccess}">
                         <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
-                            <TextBlock Text="{Binding [CompressBefore], Source={x:Static services:Lang.Instance}}"/>
+                            <TextBlock Text="{Binding Lang[CompressBefore]}"/>
                             <TextBlock Text="{Binding OriginalSize, Converter={StaticResource FileSizeConverter}}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="4" Opacity="0.6">
-                            <TextBlock Text="{Binding [CompressAfter], Source={x:Static services:Lang.Instance}}"/>
+                            <TextBlock Text="{Binding Lang[CompressAfter]}"/>
                             <TextBlock Text="{Binding CompressedSize, Converter={StaticResource FileSizeConverter}}"/>
                         </StackPanel>
                     </StackPanel>

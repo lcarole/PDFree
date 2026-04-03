@@ -5,7 +5,16 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <!-- Publish settings for Avalonia -->
+  <!-- <PropertyGroup>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+  </PropertyGroup> -->
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -25,5 +34,6 @@
     <PackageReference Include="itext" Version="9.5.0" />
     <PackageReference Include="itext.bouncy-castle-adapter" Version="9.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+    <PackageReference Include="PDFtoImage" Version="5.0.0" />
   </ItemGroup>
 </Project>

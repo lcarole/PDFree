@@ -12,6 +12,8 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IPdfSplitService, PdfSplitService>();
         collection.AddSingleton<IPdfCompressService, PdfCompressService>();
         collection.AddSingleton<IPdfRotateService, PdfRotateService>();
+        collection.AddSingleton<IPdfSignService, PdfSignService>();
+        collection.AddSingleton<IPdfPageRenderService, PdfPageRenderService>();
     }
 
     public static void AddViewModels(this IServiceCollection collection)
@@ -20,6 +22,7 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<SplitViewModel>();
         collection.AddTransient<CompressViewModel>();
         collection.AddTransient<RotateViewModel>();
+        collection.AddTransient<SignViewModel>();
         collection.AddSingleton<MainWindowViewModel>();
     }
 }

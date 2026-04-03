@@ -125,4 +125,27 @@
   <data name="RotateAngleError" xml:space="preserve"><value>Angle must be a multiple of 90°.</value></data>
   <data name="RotateError" xml:space="preserve"><value>Error during rotation: {0}</value></data>
   <data name="FileNotFound" xml:space="preserve"><value>File not found: {0}</value></data>
+
+  <!-- Sign View -->
+  <data name="ToolSignTitle" xml:space="preserve"><value>Sign</value></data>
+  <data name="ToolSignDesc" xml:space="preserve"><value>Apply a handwritten signature to a PDF.</value></data>
+  <data name="SignTitle" xml:space="preserve"><value>Sign a PDF</value></data>
+  <data name="SignSubtitle" xml:space="preserve"><value>Draw your signature and apply it to a PDF file.</value></data>
+  <data name="SignSelectFile" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="SignDialogTitle" xml:space="preserve"><value>Select a PDF file</value></data>
+  <data name="SignDrawLabel" xml:space="preserve"><value>Your signature</value></data>
+  <data name="SignDrawHint" xml:space="preserve"><value>Draw your signature below using the mouse or trackpad.</value></data>
+  <data name="SignClearButton" xml:space="preserve"><value>Clear</value></data>
+  <data name="SignPlacementLabel" xml:space="preserve"><value>Signature placement</value></data>
+  <data name="SignPlacementHint" xml:space="preserve"><value>Click on the preview to place the signature. Drag the corners to resize it.</value></data>
+  <data name="SignNoPreview" xml:space="preserve"><value>Select a PDF file to show the preview</value></data>
+  <data name="SignPageLabel" xml:space="preserve"><value>Target page</value></data>
+  <data name="SignPageLast" xml:space="preserve"><value>Last page</value></data>
+  <data name="SignPageFirst" xml:space="preserve"><value>First page</value></data>
+  <data name="SignPageCustom" xml:space="preserve"><value>Page no.</value></data>
+  <data name="SignButton" xml:space="preserve"><value>Sign PDF</value></data>
+  <data name="SignSaveTitle" xml:space="preserve"><value>Save signed PDF</value></data>
+  <data name="SignSuggestedSuffix" xml:space="preserve"><value>_signed</value></data>
+  <data name="SignSuccess" xml:space="preserve"><value>Signature applied successfully!</value></data>
+  <data name="SignError" xml:space="preserve"><value>Error during signing: {0}</value></data>
 </root>
